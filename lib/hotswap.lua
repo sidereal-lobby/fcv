@@ -2,7 +2,7 @@ local hotswap = {}
 
 function hotswap.init()
   hotswap.switch = "a" -- this is just for the spike, rest is probably ok for prod
-  hotswap.payload = {}
+  hotswap.payload = nil
 end
 
 -- https://www.lua.org/pil/8.html
