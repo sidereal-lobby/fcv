@@ -28,7 +28,7 @@ end
 function spike_action(t)
   arrow = arrow + 1
   print(t, arrow, hotswap.switch)
-  if hotswap.payload ~= nil then
+  if type(hotswap.payload) ~= 'table' then
     hotswap.payload()
   end
 end
