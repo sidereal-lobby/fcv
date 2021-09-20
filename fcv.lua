@@ -28,8 +28,8 @@ end
 function spike_action(t)
   arrow = arrow + 1
   print(t, arrow, hotswap.switch)
-  if type(hotswap.payload) == 'function' then
-    hotswap.payload()
+  if type(hotswap.payload) == 'table' then
+    print(hotswap.payload[1]())
   end
 end
 
