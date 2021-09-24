@@ -20,31 +20,31 @@ fcv_timer = nil
 function init()
   arrow = 0
 
-	-- better than r() a lot of the time
-	-- on crash, copy+paste+execute from REPL output
+  -- better than r() a lot of the time
+  -- on crash, copy+paste+execute from REPL output
   print('norns.script.load("'..norns.state.script..'")')
 
-	init_config()
+  init_config()
 
   hotswap.init()
   graphics.init()
   network.init()
 
-	init_clock()
+  init_clock()
 end
 
 function init_config()
-	-- https://stackoverflow.com/a/41176826
-	config = {}
-	local apply, err = loadfile("/home/we/dust/code/fcv/config.lua", "t", config)
-	if apply then
-		apply()
-		print("THIS IS CONFIG\n")
-		tabutil.print(config)
-		print("THAT WAS CONFIG\n")
-	else
-		print(err)
-	end
+  -- https://stackoverflow.com/a/41176826
+  config = {}
+  local apply, err = loadfile("/home/we/dust/code/fcv/config.lua", "t", config)
+  if apply then
+    apply()
+    print("THIS IS CONFIG\n")
+    tabutil.print(config)
+    print("THAT WAS CONFIG\n")
+  else
+    print(err)
+  end
 end
 
 function init_clock()
