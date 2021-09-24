@@ -9,23 +9,35 @@ lattice = require("lattice")
 s = include("lib/Sequins")
 fn = include("lib/functions")
 hotswap = include("lib/hotswap")
+graphics = include("lib/graphics")
+network = include("lib/network")
+
+fcv_timer = nil
 
 function init()
-  print("\n\nwelcome to the lobby")
-  print("\n\nthis is just a spike for now")
-  print("(making it in the actual repo because ape)")
-  print("set your clock source to \"internal\"")
-  print("and set your bpm to 100, ya ape!\n\n")
   arrow = 0
   hotswap.init()
-  spike_lattice = lattice:new{}
-  spike_pattern = spike_lattice:new_pattern{
-    action = function(t) spike_action(t) end
+  graphics.init()
+  network.init()
+  fcv_lattice = lattice:new{}
+  fcv_umbilicus = fcv_lattice:new_pattern{
+    action = function(t) fcv_umbilicus_action(t) end
   }
-  spike_lattice:start()
+  fcv_timer = fcv_lattice:new_pattern{
+    action = function(t) fcv_timer_action(t) end,
+    division = 1/8
+  }
+  fcv_lattice:start()
+  params:set("clock_tempo", 120)
+  clock.set_source("internal")
+  redraw_clock_id = clock.run(redraw_clock)
 end
 
-function spike_action(t)
+function fcv_timer_action(t)
+  network.countdown = util.wrap(network.countdown + 1, 0, 16)
+end
+
+function fcv_umbilicus_action(t)
   arrow = arrow + 1
   print(t, arrow, hotswap.switch)
   if type(hotswap.payload) == 'table' then
@@ -44,6 +56,18 @@ function enc(e, d)
   print(e, d)
 end
 
-function redraw()
-  
+function redraw_clock()
+  while true do
+    redraw()
+    clock.sleep(1 / graphics.fps)
+  end
 end
+
+function redraw()
+  graphics:setup()
+  graphics:local_status()
+  graphics:network_status()
+  graphics:teardown()  
+end
+
+
