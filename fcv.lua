@@ -50,11 +50,14 @@ end
 function init_clock()
   fcv_lattice = lattice:new{}
   fcv_umbilicus = fcv_lattice:new_pattern{
-    action = function(t) fcv_umbilicus_action(t) end
+    action = fcv_umbilicus_action
   }
   fcv_timer = fcv_lattice:new_pattern{
-    action = function(t) fcv_timer_action(t) end,
+    action = fcv_timer_action,
     division = 1/8
+  }
+  netverk = fcv_lattice:new_pattern{
+    action = network.step
   }
   fcv_lattice:start()
 
@@ -63,7 +66,7 @@ function init_clock()
   redraw_clock_id = clock.run(redraw_clock)
 end
 
-function fcv_timer_action(t)
+function fcv_timer_action()
   network.countdown = util.wrap(network.countdown + 1, 0, 16)
 end
 
@@ -100,3 +103,6 @@ function redraw()
   graphics:teardown()  
 end
 
+function cleanup()
+  network.cleanup()
+end
