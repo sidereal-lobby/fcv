@@ -3,8 +3,10 @@ util = require "util"
 websocket = require "http.websocket"
 cq = require "cqueues"
 
-local ws
-local rx_loop
+ws = nil
+rx_loop = nil
+
+
 -- local ws = websocket.new_from_uri(ws_relay_url)
 
 function network.init()
@@ -12,6 +14,7 @@ function network.init()
   network.last_pull_ok = true
 
   print('creating new cq')
+  -- what does this thing return again?
   rx_loop = cq.new()
 
   print('creating web socket')
@@ -29,12 +32,23 @@ function network.init()
     local data = assert(ws:receive())
     print('got something from network!')
     print(data)
-    assert(data == "koo-eee!")
+    print("let's say something else to the network!")
+    assert(ws:send("what's good fam? it's "..util.time().." o'clock"))
+    print("we'll see what they say...")
+    -- assert(data == "koo-eee!")
   end)
+
+  rx_loop:loop()
 end
 
 function network.step()
-  rx_loop:step()
+  --print("step by step")
+  if false then
+    while not rx_loop:empty() do
+      local ok, err = rx_loop:step()
+      if not ok then err("loop.ste: "..err) end
+    end
+  end
 end
 
 function network.cleanup()

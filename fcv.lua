@@ -33,15 +33,16 @@ function init()
   init_clock()
 end
 
+
 function init_config()
   -- https://stackoverflow.com/a/41176826
   config = {}
-  local apply, err = loadfile("/home/we/dust/code/fcv/config.lua", "t", config)
+  local apply, err = loadfile("/home/we/dust/code/fcv/lib/config.lua", "t", config)
   if apply then
     apply()
-    print("THIS IS CONFIG\n")
+    print("-- CONFIG --")
     tabutil.print(config)
-    print("THAT WAS CONFIG\n")
+    print("-- END CONFIG --")
   else
     print(err)
   end
@@ -56,6 +57,9 @@ function init_clock()
     action = fcv_timer_action,
     division = 1/8
   }
+  -- the http examples just had this in a while loop
+  -- not sure whether that would block other norns stuff (redraw, clock)
+  -- if not that's probably the way to go
   netverk = fcv_lattice:new_pattern{
     action = network.step
   }
@@ -72,9 +76,13 @@ end
 
 function fcv_umbilicus_action(t)
   arrow = arrow + 1
-  print(t, arrow, hotswap.switch)
+  if config.debug_hotswap then
+    print(t, arrow, hotswap.switch)
+  end
   if type(hotswap.payload) == 'table' then
-    print(hotswap.payload[1]())
+    if config.debug_hotswap then
+      print(hotswap.payload[1]())
+    end
   end
 end
 
