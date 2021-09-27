@@ -1,7 +1,9 @@
 -- northern information
 -- graphics library plus silo nonsense
 
-graphics = {}
+graphics = {
+  title = "Sidereal Lobby: FCV"
+}
 
 function graphics.init()
   screen.aa(1)
@@ -12,7 +14,7 @@ end
 
 function graphics:local_status()
   self:mls(1, 0, 0, 64, 15)
-  self:text(3, 8, "Sideral Lobby: FCV")
+  self:text(3, 8, graphics.title)
   self:text(3, 16, "Laws & Etters, mmxxi")
   self:text(3, 24, "Lua: " .. hotswap.switch)
   self:text(3, 32, "Item: " .. "status")
@@ -25,7 +27,7 @@ end
 function graphics:network_status()
   self:timer()
   local status = network.last_pull_ok and "UMBILICUS OK" or self:scramble()
-  screen.level(16 - network.countdown)
+  screen.level(16 - countdown)
   screen.text_rotate(119, 63, status, -90)
   self:mls(111, 0, 110, 64, 15)
   local smile_like_you_mean_it = network.last_pull_ok and ":)" or ":("
@@ -33,10 +35,10 @@ function graphics:network_status()
 end
 
 function graphics:timer()
-  local y = util.linlin(0, 16, 0, 64, network.countdown)
-  self:rect(121, y, 7, 64, network.countdown)
-  screen.level(16 - network.countdown)
-  screen.text_rotate(127, 63, 16 - network.countdown, -90)
+  local y = util.linlin(0, 16, 0, 64, countdown)
+  self:rect(121, y, 7, 64, countdown)
+  screen.level(16 - countdown)
+  screen.text_rotate(127, 63, 16 - countdown, -90)
 end
 
 function graphics:scramble()

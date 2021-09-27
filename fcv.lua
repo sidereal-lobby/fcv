@@ -16,6 +16,7 @@ network = include("lib/network")
 tabutil = require("tabutil")
 
 fcv_timer = nil
+countdown = 0
 
 function init()
   arrow = 0
@@ -71,7 +72,7 @@ function init_clock()
 end
 
 function fcv_timer_action()
-  network.countdown = util.wrap(network.countdown + 1, 0, 16)
+  countdown = util.wrap(countdown + 1, 0, 16)
 end
 
 function fcv_umbilicus_action(t)
