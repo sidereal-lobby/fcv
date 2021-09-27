@@ -1,17 +1,10 @@
-local network = {
-  ready = false,
-  last_pull_ok = "this does not belong here"
-}
-util = require "util" 
-client = include("fcv/lib/websocket")
-
-ws = nil
-rx_loop = nil
-
-local counter1 = 1
-local counter2 = 0
+local network = {}
 
 function network.init()
+  network.ready = false
+  network.counter1 = 1
+  network.counter2 = 0
+
   client = client.new(config.ws_relay_host, config.ws_relay_port)
 
   function client:onmessage(s) 
@@ -58,17 +51,17 @@ function network.step()
   end
 
   if counter1 == 0 then
-    counter2 = counter2 + 1
-    msg = "LUA\ngraphics.title = 'generic message #"..counter2.."'"
+    self.counter2 = self.counter2 + 1
+    msg = "LUA\ngraphics.title = 'generic message #" .. self.counter2 .. "'"
     client:send(msg)
   end
 
-  counter1 = (counter1 + 1) % 8
+  self.counter1 = (self.counter1 + 1) % 8
 end
 
 called_step = false
 
-function network.cleanup()
+function network:cleanup()
   if client then assert(client:close()) end
 end
 

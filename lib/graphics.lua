@@ -1,59 +1,55 @@
--- northern information
--- graphics library plus silo nonsense
-
-graphics = {
-  title = "Sidereal Lobby: FCV"
-}
+local graphics = {}
 
 function graphics.init()
+  graphics.title = "Sidereal Lobby: FCV"
+  graphics.frame = 0
+  graphics.spinner_frame = 0
+  graphics.spinner_index = 1
+  graphics.spinner_glyph = {}
+  graphics.spinner_glyph[1] = "/"
+  graphics.spinner_glyph[2] = "-"
+  graphics.spinner_glyph[3] = "\\"
+  graphics.spinner_glyph[4] = "-"
+  graphics.fps = 15
   screen.aa(1)
   screen.font_face(0)
   screen.font_size(8)
-  graphics.fps = 15
+end
+
+function graphics:draw_home()
+  graphics.frame = graphics.frame + 1
+  graphics:setup()
+  graphics:local_status()
+  graphics:network_status()
+  graphics:spinner()
+  graphics:teardown()  
 end
 
 function graphics:local_status()
-  self:mls(1, 0, 0, 64, 15)
-  self:text(3, 8, graphics.title)
-  self:text(3, 16, "Laws & Etters, mmxxi")
-  self:text(3, 24, "Lua: " .. hotswap.switch)
-  self:text(3, 32, "Item: " .. "status")
-  self:text(3, 40, "Item: " .. "status")
-  self:text(3, 48, "Item: " .. "status")
-  self:text(3, 56, "Item: " .. "status")
-  self:text(3, 64, "Item: " .. "status")
+  self:text(0, 8, graphics.title)
+  self:text(0, 16, "Laws & Etters, mmxxi")
+  self:text(0, 24, "Item: " .. "status")
+  self:text(0, 32, "Item: " .. "status")
+  self:text(0, 40, "Item: " .. "status")
+  self:text(0, 48, "Item: " .. "status")
+  self:text(0, 56, "Item: " .. "status")
+  self:text(0, 64, "Item: " .. "status")
 end
 
 function graphics:network_status()
-  self:timer()
-  local status = network.last_pull_ok and "UMBILICUS OK" or self:scramble()
-  screen.level(16 - countdown)
-  screen.text_rotate(119, 63, status, -90)
-  self:mls(111, 0, 110, 64, 15)
-  local smile_like_you_mean_it = network.last_pull_ok and ":)" or ":("
-  self:text(123, 7, smile_like_you_mean_it, 15)
+  self:text(123, 7, network.ready and ":)" or ":(", 15)
 end
 
-function graphics:timer()
-  local y = util.linlin(0, 16, 0, 64, countdown)
-  self:rect(121, y, 7, 64, countdown)
-  screen.level(16 - countdown)
-  screen.text_rotate(127, 63, 16 - countdown, -90)
+function graphics:spinner()
+  self.spinner_frame = util.wrap(self.spinner_frame + 1, 1, 8)
+  if self.frame % 8 == 0 then
+    self.spinner_index = util.wrap(self.spinner_index + 1, 1, 4)
+  end
+  self:text(117, 7, self.spinner_glyph[self.spinner_index], 15)
 end
 
-function graphics:scramble()
-  local status = {"U","%","B","!","L","!","C","u","$",",H","4","6","M"}
-  local out = ""
-  -- fwiw fisher-yates shuffle 
-  for i = #status, 2, -1 do
-    local j = math.random(i)
-    status[i], status[j] = status[j], status[i]
-  end
-  for i = #status, 2, -1 do
-    out = out .. status[i]
-  end
-  return out
-end
+-- northern information
+-- graphics library plus
 
 function graphics:setup()
   screen.clear()
