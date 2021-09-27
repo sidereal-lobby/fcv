@@ -8,7 +8,7 @@ client = include("fcv/lib/websocket")
 ws = nil
 rx_loop = nil
 
-local counter1 = 0
+local counter1 = 1
 local counter2 = 0
 
 function network.init()
