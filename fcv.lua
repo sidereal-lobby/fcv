@@ -12,6 +12,8 @@ hotswap = include("lib/hotswap")
 graphics = include("lib/graphics")
 network = include("lib/network")
 
+engine.name = 'Fcv'
+
 -- DEBUGGINSON
 tabutil = require("tabutil")
 
