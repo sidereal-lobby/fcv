@@ -2,8 +2,6 @@ local network = {}
 
 function network.init()
   network.ready = false
-  network.counter1 = 1
-  network.counter2 = 0
 
   client = client.new(config.ws_relay_host, config.ws_relay_port)
 
@@ -44,19 +42,10 @@ end
 
 function network.step()
   client:update()
-
   if not network.ready then 
     print("please wait to connect...")
     return 
   end
-
-  if counter1 == 0 then
-    self.counter2 = self.counter2 + 1
-    msg = "LUA\ngraphics.title = 'generic message #" .. self.counter2 .. "'"
-    client:send(msg)
-  end
-
-  self.counter1 = (self.counter1 + 1) % 8
 end
 
 called_step = false
