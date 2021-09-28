@@ -18,9 +18,17 @@ function network.init()
         print('HEY YOU. I GOT A MESSAGE FOR YA:\n"'..content..'"') 
       elseif command == 'LUA' then
         print('executing as lua:\n'..content)
-        load(content)()
+        local success, result = pcall(load(content))
+        if success then
+          print("<OK>")
+          print(result)
+        else
+          print("oh FUCK ERROR!!!!")
+          print(result)
+        end
       elseif command == 'SC' then
-        print('supercollider not implemented yet... STAY TUNED')
+        local result = engine.eval(content);
+        print('result of SC: '..(result ~= nil and result or '(nil)'))
       else
         print('unknown command "'..command..'"')
       end
