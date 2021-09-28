@@ -18,6 +18,15 @@ Engine_Fcv : CroneEngine {
       Ndef(msg[1].asSymbol).set(\t_trig, 1) 
     });
 
+    this.addCommand("eval", "s", {|msg| 
+      try {
+        msg[1].asString.compile.value;
+      } { |error|
+        ("error evaluating:\n```"++msg[1]++
+          "```\n----\n"++error++"\n----").postln;
+      }
+    });
+
     ["note", "mod", "lag"].do({|cmd|
       this.addCommand(cmd, "sf", {|msg| 
         Ndef(msg[1].asSymbol).set(cmd.asSymbol, msg[2]) 
