@@ -2,7 +2,6 @@ local network = {}
 
 function network.init()
   network.ready = false
-
   client = client.new(config.ws_relay_host, config.ws_relay_port)
 
   function client:onmessage(s) 
@@ -18,7 +17,11 @@ function network.init()
         print('HEY YOU. I GOT A MESSAGE FOR YA:\n"'..content..'"') 
       elseif command == 'LUA' then
         print('executing as lua:\n'..content)
+        local cache_tempo = l.t
         local success, result = pcall(load(content))
+        if cache_tempo ~= l.t then
+          params:set("clock_tempo", l.t)
+        end
         if success then
           print("<OK>")
           print(result)
@@ -48,22 +51,19 @@ function network.init()
   print('bye')
 end
 
+function network.init_clock()
+  network_lattice = lattice:new{}
+  network_pattern = network_lattice:new_pattern{
+    action = network.step
+  }
+  network_lattice:start()
+end
+
 function network.step()
   client:update()
   if not network.ready then 
     print("please wait to connect...")
-    return 
-  else
-    for k, v in pairs(l) do
-      if l[k]["off"] == 0 then
-        engine.note(k, l[k]["nte"]())
-        engine.mod(k, l[k]["mod"]())
-        if l[k]["trg"]() == 1 then
-          engine.trig(k)
-        end
-        -- l[k]["lng"] = 0 -- unimplemented
-      end
-    end
+    return
   end
 end
 
