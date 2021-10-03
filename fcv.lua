@@ -17,8 +17,18 @@ tabutil = require("tabutil")
 graphics = include("lib/graphics")
  network = include("lib/network")
        s = include("lib/Sequins")
+
+-- LIVECODE SETUP
       
-       l = {} -- this is the good ape (all apes are good apes)
+l = { gye = {}, ixb = {}, mek = {}, urn = {}, vrs = {}, yyr = {} }     
+   
+for k, v in pairs(l) do
+  l[k]["nte"] = s{1}
+  l[k]["trg"] = s{1}
+  l[k]["mod"] = s{1}
+  l[k]["lng"] = 0
+  l[k]["off"] = 0
+end
 
 function init()
   print('norns.script.load("'..norns.state.script..'")')

@@ -55,7 +55,7 @@ function network.step()
     return 
   else
     for k, v in pairs(l) do
-      if l[k]["off"]() == 0 then
+      if l[k]["off"] == 0 then
         engine.note(k, l[k]["nte"]())
         engine.mod(k, l[k]["mod"]())
         if l[k]["trg"]() == 1 then
