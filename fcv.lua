@@ -9,7 +9,7 @@ engine.name = 'Fcv'
 
 lattice = require("lattice")
 tabutil = require("tabutil")
-   util = require "util" 
+   util = require("util") 
 
 
   client = include("lib/websocket")
@@ -18,6 +18,8 @@ graphics = include("lib/graphics")
  network = include("lib/network")
        s = include("lib/Sequins")
       
+       l = {} -- this is the good ape (all apes are good apes)
+
 function init()
   print('norns.script.load("'..norns.state.script..'")')
   fn.init_config()

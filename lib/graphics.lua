@@ -28,12 +28,11 @@ end
 function graphics:local_status()
   self:text(0, 8, graphics.title)
   self:text(0, 16, "Laws & Etters, mmxxi")
-  self:text(0, 24, "Item: " .. "status")
-  self:text(0, 32, "Item: " .. "status")
-  self:text(0, 40, "Item: " .. "status")
-  self:text(0, 48, "Item: " .. "status")
-  self:text(0, 56, "Item: " .. "status")
-  self:text(0, 64, "Item: " .. "status")
+  -- self:text(0, 32, "Item: " .. "status")
+  -- self:text(0, 40, "Item: " .. "status")
+  -- self:text(0, 48, "Item: " .. "status")
+  -- self:text(0, 56, "Item: " .. "status")
+  -- self:text(0, 64, "Item: " .. "status")
 end
 
 function graphics:network_status()
