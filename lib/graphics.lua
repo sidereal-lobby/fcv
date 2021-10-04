@@ -38,16 +38,12 @@ end
 function graphics:local_status()
   self:text(0, 8, graphics.title)
   self:text(0, 16, "Laws & Etters, mmxxi")
-  self:text_right(20, 40, "gye:") self:text(22, 40, graphics:status(l.gye.ena))
-  self:text_right(20, 48, "ixb:") self:text(22, 48, graphics:status(l.ixb.ena))
-  self:text_right(20, 56, "mek:") self:text(22, 56, graphics:status(l.mek.ena))
-  self:text_right(64, 40, "urn:") self:text(66, 40, graphics:status(l.urn.ena))
-  self:text_right(64, 48, "ixb:") self:text(66, 48, graphics:status(l.ixb.ena))
-  self:text_right(64, 56, "mek:") self:text(66, 56, graphics:status(l.mek.ena))
-end
-
-function graphics:status(i)
-  return i == 1 and "ON" or "OFF"
+  self:text_right(20, 40, "gye:") self:text(22, 40, l.gye.ena)
+  self:text_right(20, 48, "ixb:") self:text(22, 48, l.ixb.ena)
+  self:text_right(20, 56, "mek:") self:text(22, 56, l.mek.ena)
+  self:text_right(64, 40, "urn:") self:text(66, 40, l.urn.ena)
+  self:text_right(64, 48, "ixb:") self:text(66, 48, l.ixb.ena)
+  self:text_right(64, 56, "mek:") self:text(66, 56, l.mek.ena)
 end
 
 function graphics:tempo()
