@@ -2,7 +2,7 @@ local six = {}
 
 gye_lattice = lattice:new{}
 gye_pattern = gye_lattice:new_pattern{
-  action = function() six:step("gye") end
+  action = function() six.step("gye") end
 }
 
 ixb_lattice = lattice:new{}
@@ -31,7 +31,7 @@ yyr_pattern = yyr_lattice:new_pattern{
 }
 
 
-function six:step(voice)
+function six.step(voice)
   if voice == nil then return end
   six:update_division(voice)
   if l[voice]["ena"] == 1 then
