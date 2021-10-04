@@ -11,7 +11,7 @@ for k, v in pairs(l) do
   l[k]["trg"] = s{1}
   l[k]["mod"] = s{1}
   l[k]["div"] = s{1/4}
-  l[k]["ena"] = true
+  l[k]["ena"] = 1
 end
 
 l.r = 50  -- root
