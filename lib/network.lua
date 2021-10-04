@@ -39,7 +39,7 @@ function network.init()
   end
 
   function client:onopen() 
-    self:send('MSG\noh hi') 
+    self:send('MSG\noh hi, my name is '..(config.norns_name or 'the norns of stonks')) 
     network.ready = true
   end
 
