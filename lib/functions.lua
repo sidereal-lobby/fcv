@@ -14,27 +14,6 @@ function fn.init_config()
   end
 end
 
-function fn.init_clock()
-  fcv_lattice = lattice:new{}
-  -- the http examples just had this in a while loop
-  -- not sure whether that would block other norns stuff (redraw, clock)
-  -- if not that's probably the way to go
-  netverk = fcv_lattice:new_pattern{
-    action = network.step
-  }
-  fcv_lattice:start()
-  params:set("clock_tempo", config.tempo)
-  clock.set_source(config.clock_source)
-  redraw_clock_id = clock.run(fn.redraw_clock)
-end
-
-function fn.redraw_clock()
-  while true do
-    redraw()
-    clock.sleep(1 / graphics.fps)
-  end
-end
-
 function rerun()
   norns.script.load(norns.state.script)
 end
