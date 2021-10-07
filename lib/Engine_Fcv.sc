@@ -7,7 +7,7 @@ Engine_Fcv : CroneEngine {
     [\gye, \ixb, \mek, \urn, \vrs, \yyr].do({|x|
       Ndef(x).fadeTime = 2;
       Ndef(x, {|t_trig=0, note=48, volume=1, mod=0, lag=0| 
-        var env = t_trig.lagud(0, 0.2);
+        var env = t_trig.lagud(0, 0.2) * volume;
         note = note.lag(lag);
         mod = mod.lag(lag);
         SinOscFB.ar((note).midicps, mod, env) ! 2;
