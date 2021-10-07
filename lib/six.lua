@@ -38,7 +38,7 @@ function six.step(voice)
     engine.note(voice, l[voice]["nte"]() + l.r)
     engine.mod(voice, l[voice]["mod"]())
     if l[voice]["trg"]() == 1 then
-      engine.trig(voice)
+      engine.trig(voice, math.random())
     end
   end
 end
