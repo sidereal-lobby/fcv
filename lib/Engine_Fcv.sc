@@ -6,7 +6,7 @@ Engine_Fcv : CroneEngine {
 	alloc {
     [\gye, \ixb, \mek, \urn, \vrs, \yyr].do({|x|
       Ndef(x).fadeTime = 2;
-      Ndef(x, {|t_trig=0, note=48, mod=0, lag=0| 
+      Ndef(x, {|t_trig=0, note=48, volume=1, mod=0, lag=0| 
         var env = t_trig.lagud(0, 0.2);
         note = note.lag(lag);
         mod = mod.lag(lag);
@@ -14,8 +14,14 @@ Engine_Fcv : CroneEngine {
       }).play;
     });
 
-    this.addCommand("trig", "s", {|msg| 
-      Ndef(msg[1].asSymbol).set(\t_trig, 1) 
+    this.addCommand("trig", "sf", {|msg| 
+      if(msg[2] != 0, {
+        Ndef(msg[1].asSymbol).set(\volume, msg[2]);
+      }, { 
+        "volume not specified".postln; 
+      });
+
+      Ndef(msg[1].asSymbol).set(\t_trig, 1);
     });
 
     this.addCommand("eval", "s", {|msg| 
