@@ -17,11 +17,7 @@ function network.init()
         print('HEY YOU. I GOT A MESSAGE FOR YA:\n"'..content..'"') 
       elseif command == 'LUA' then
         print('executing as lua:\n'..content)
-        local cache_tempo = l.t
         local success, result = pcall(load(content))
-        if cache_tempo ~= l.t then
-          params:set("clock_tempo", l.t)
-        end
         if success then
           print("<OK>")
           print(result)
@@ -62,7 +58,7 @@ end
 function network.step()
   client:update()
   if not network.ready then 
-    print("please wait to connect...")
+    -- print("please wait to connect...")
     return
   end
 end

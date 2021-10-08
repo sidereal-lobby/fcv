@@ -30,35 +30,6 @@ yyr_pattern = yyr_lattice:new_pattern{
   action = function() six.step("yyr") end
 }
 
-
-function six.step(voice)
-  if voice == nil then return end
-  six:update_division(voice)
-  if l[voice]["ena"] == 1 then
-    engine.note(voice, l[voice]["nte"]() + l.r)
-    engine.mod(voice, l[voice]["mod"]())
-    if l[voice]["trg"]() == 1 then
-      engine.trig(voice, math.random())
-    end
-  end
-end
-
-function six:update_division(voice)
-  if voice == "gye" then
-    gye_pattern:set_division(l.gye.div())
-  elseif voice == "ixb" then
-    gye_pattern:set_division(l.ixb.div())
-  elseif voice == "mek" then
-    gye_pattern:set_division(l.mek.div())
-  elseif voice == "urn" then
-    gye_pattern:set_division(l.urn.div())
-  elseif voice == "vrs" then
-    gye_pattern:set_division(l.vrs.div())
-  elseif voice == "yrr" then
-    gye_pattern:set_division(l.yrr.div())
-  end
-end
-
 function six.init()
   gye_lattice:start()
   ixb_lattice:start()
@@ -66,6 +37,34 @@ function six.init()
   urn_lattice:start()
   vrs_lattice:start()
   yyr_lattice:start()
-end  
+end
+
+function six.step(voice)
+  if voice == nil then return end
+  six:update_meter(voice)
+  if v[voice]["ena"] == 1 then
+    engine.note(voice, root_cache + v[voice]["tpz"]() + v[voice]["nte"]())
+    engine.mod(voice, v[voice]["mod"]())
+    if v[voice]["trg"]() == 1 then
+      engine.trig(voice, v[voice]["vel"]())
+    end
+  end
+end
+
+function six:update_meter(voice)
+  if voice == "gye" then
+    gye_lattice:set_meter(v.gye.mtr())
+  elseif voice == "ixb" then
+    ixb_lattice:set_meter(v.ixb.mtr())
+  elseif voice == "mek" then
+    mek_lattice:set_meter(v.mek.mtr())
+  elseif voice == "urn" then
+    urn_lattice:set_meter(v.urn.mtr())
+  elseif voice == "vrs" then
+    vrs_lattice:set_meter(v.vrs.mtr())
+  elseif voice == "yrr" then
+    yrr_lattice:set_meter(v.yrr.mtr())
+  end
+end
 
 return six
