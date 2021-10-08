@@ -22,7 +22,7 @@ for key, val in pairs(v) do
   v[key]["mod"] = s{1}  -- modulation: 0 - 1000
   v[key]["mtr"] = s{1}  -- meter: 1 - n
   v[key]["nte"] = s{0}  -- note: semitones from v.root aka root 
-  v[key]["tpz"] = s{0}  -- transpose: semitones from v.root aka root  
+  v[key]["tpz"] = s{0}  -- transpose: just this voice
   v[key]["trg"] = s{1}  -- trigger: 0 or 1
   v[key]["vel"] = s{1}  -- velocity: 0.0 - 1.0
 end
