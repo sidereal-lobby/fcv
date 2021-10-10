@@ -1,11 +1,11 @@
 Engine_Fcv : CroneEngine {
-  ~bps = 120;
 	*new { arg context, doneCallback;
 		^super.new(context, doneCallback);
 	}
 
 	alloc {
     // Global bps (beats-per-second) tempo
+    ~bps = 120;
     Ndef(\bps, {|bps, lag=0| bps.lag(0); });
     
     this.addCommand("bps", "f", {|msg|
