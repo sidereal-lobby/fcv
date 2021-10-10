@@ -1,7 +1,8 @@
 -- "apes together strong"
 
 engine.name = 'Fcv'
-
+  
+  -- audio = require("audio")
       s = require("sequins")
 lattice = require("lattice")
 tabutil = require("tabutil")
@@ -18,24 +19,35 @@ graphics = include("lib/graphics")
 v = { gye = {}, ixb = {}, mek = {}, qpo = {}, urn = {}, vrs = {} }     
    
 for key, val in pairs(v) do
-  v[key]["ena"] = 0     -- enabled: 0 or 1
+  v[key]["ena"] = 1     -- enabled: 0 or 1
   v[key]["mod"] = s{1}  -- modulation: 0 - 1000
   v[key]["mtr"] = s{1}  -- meter: 1 - n
   v[key]["nte"] = s{0}  -- note: semitones from v.root aka root 
   v[key]["tpz"] = s{0}  -- transpose: just this voice
   v[key]["trg"] = s{1}  -- trigger: 0 or 1
-  v[key]["vel"] = s{1}  -- velocity: 0.0 - 1.0
+  v[key]["vel"] = s{1}  -- velocity: 0 - 1000
 end
 
 v.root = s{60}  -- root
 v.tempo = s{120} -- tempo
 
-root_cache, tempo_cache = 0, 0
+root_cache, tempo_cache = v.root(), v.tempo()
 
 -- END LIVECODE SETUP
 
 
 function init()
+  -- y u no work
+  -- audio.comp_on()
+  -- audio.comp_mix(.5)
+  -- audio.comp_param("ratio",      4.0)
+  -- audio.comp_param("threshold",  -10.0)
+  -- audio.comp_param("attack",     5.0)
+  -- audio.comp_param("release",    51.0)
+  -- audio.comp_param("pre_gain",   0.0)
+  -- audio.comp_param("post_gain",  9.0)  
+
+
   print('norns.script.load("'..norns.state.script..'")')
   params:set("clock_tempo", v.tempo())
   fn.init_config()
@@ -55,6 +67,7 @@ end
 function tempo_action()
   -- cache these so we can display them
   -- cos sequins change values on each access
+  screen.ping()
   root_cache = v.root()
   tempo_cache = v.tempo()
   params:set("clock_tempo", tempo_cache)
