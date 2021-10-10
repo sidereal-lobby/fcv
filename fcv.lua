@@ -25,7 +25,7 @@ for key, val in pairs(v) do
   v[key]["nte"] = s{0}  -- note: semitones from v.root aka root 
   v[key]["tpz"] = s{0}  -- transpose: just this voice
   v[key]["trg"] = s{1}  -- trigger: 0 or 1
-  v[key]["vel"] = s{1}  -- velocity: 0 - 1000
+  v[key]["vel"] = s{100}  -- velocity: 0 - 1000
 end
 
 v.root = s{60}  -- root

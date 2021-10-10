@@ -48,7 +48,7 @@ function six.step(voice)
     engine.note(voice, root_cache + v[voice]["tpz"]() + v[voice]["nte"]())
     engine.mod(voice, v[voice]["mod"]())
     if v[voice]["trg"]() == 1 then
-      engine.trig(voice, util.linlin(0, 1000, 0.0, 1.0, v[voice]["vel"]()))
+      engine.trig(voice, util.linlin(0, 100, 0.0, 1.0, v[voice]["vel"]()))
     end
   end
 end
