@@ -15,10 +15,10 @@ graphics = include("lib/graphics")
 
 -- START LIVECODE SETUP
 
-v = { gye = {}, ixb = {}, mek = {}, urn = {}, vrs = {}, yyr = {} }     
+v = { gye = {}, ixb = {}, mek = {}, qpo = {}, urn = {}, vrs = {} }     
    
 for key, val in pairs(v) do
-  v[key]["ena"] = 1     -- enabled: 0 or 1
+  v[key]["ena"] = 0     -- enabled: 0 or 1
   v[key]["mod"] = s{1}  -- modulation: 0 - 1000
   v[key]["mtr"] = s{1}  -- meter: 1 - n
   v[key]["nte"] = s{0}  -- note: semitones from v.root aka root 

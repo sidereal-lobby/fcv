@@ -4,7 +4,7 @@ Engine_Fcv : CroneEngine {
 	}
 
 	alloc {
-    [\gye, \ixb, \mek, \urn, \vrs, \yyr].do({|x|
+    [\gye, \ixb, \mek, \urn, \vrs, \qpo].do({|x|
       Ndef(x).fadeTime = 2;
       Ndef(x, {|t_trig=0, note=48, volume=1, mod=0, lag=0| 
         var env = t_trig.lagud(0, 0.2) * volume;

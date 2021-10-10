@@ -15,6 +15,11 @@ mek_pattern = mek_lattice:new_pattern{
   action = function() six.step("mek") end
 }
 
+qpo_lattice = lattice:new{}
+qpo_pattern = qpo_lattice:new_pattern{
+  action = function() six.step("qpo") end
+}
+
 urn_lattice = lattice:new{}
 urn_pattern = urn_lattice:new_pattern{
   action = function() six.step("urn") end
@@ -25,18 +30,15 @@ vrs_pattern = vrs_lattice:new_pattern{
   action = function() six.step("vrs") end
 }
 
-yyr_lattice = lattice:new{}
-yyr_pattern = yyr_lattice:new_pattern{
-  action = function() six.step("yyr") end
-}
+
 
 function six.init()
   gye_lattice:start()
   ixb_lattice:start()
   mek_lattice:start()
+  qpo_lattice:start()
   urn_lattice:start()
   vrs_lattice:start()
-  yyr_lattice:start()
 end
 
 function six.step(voice)
@@ -58,12 +60,12 @@ function six:update_meter(voice)
     ixb_lattice:set_meter(v.ixb.mtr())
   elseif voice == "mek" then
     mek_lattice:set_meter(v.mek.mtr())
+  elseif voice == "qpo" then
+    qpo_lattice:set_meter(v.qpo.mtr())
   elseif voice == "urn" then
     urn_lattice:set_meter(v.urn.mtr())
   elseif voice == "vrs" then
     vrs_lattice:set_meter(v.vrs.mtr())
-  elseif voice == "yrr" then
-    yrr_lattice:set_meter(v.yrr.mtr())
   end
 end
 

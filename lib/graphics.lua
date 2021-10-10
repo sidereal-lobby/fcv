@@ -1,19 +1,9 @@
 local graphics = {}
 
 function graphics.init()
-  graphics.title = "Sidereal Lobby: FCV"
   graphics.frame = 0
-  graphics.spinner_frame = 0
-  graphics.spinner_index = 1
-  graphics.spinner_glyph = {}
-  graphics.spinner_glyph[1] = "/"
-  graphics.spinner_glyph[2] = "-"
-  graphics.spinner_glyph[3] = "\\"
-  graphics.spinner_glyph[4] = "-"
   graphics.fps = 15
   screen.aa(1)
-  screen.font_face(0)
-  screen.font_size(8)
 end
 
 
@@ -27,44 +17,58 @@ end
 function graphics:draw_home()
   graphics.frame = graphics.frame + 1
   graphics:setup()
-  graphics:local_status()
-  graphics:network_status()
-  graphics:spinner()
-  graphics:tempo()
-  graphics:root()
+  graphics:reset_font()
+  graphics:pulse()
+  graphics:silo()
+  graphics:reset_font()
+  graphics:state()
   graphics:teardown()  
 end
 
-function graphics:local_status()
-  self:text(0, 8, graphics.title)
-  self:text(0, 16, "Laws & Etters, mmxxi")
-  self:text_right(20, 40, "gye:") self:text(22, 40, v.gye.ena)
-  self:text_right(20, 48, "ixb:") self:text(22, 48, v.ixb.ena)
-  self:text_right(20, 56, "mek:") self:text(22, 56, v.mek.ena)
-  self:text_right(64, 40, "urn:") self:text(66, 40, v.urn.ena)
-  self:text_right(64, 48, "ixb:") self:text(66, 48, v.ixb.ena)
-  self:text_right(64, 56, "mek:") self:text(66, 56, v.mek.ena)
+function graphics:pulse()
+  self:circle(9, 56, 8, 15)
+  self:circle(9, 56, 7, 0)
+  self:circle(9, 56, 5, self.frame % 15)
 end
 
-function graphics:tempo()
-  self:text_right(112, 8, tempo_cache, 15)
+function graphics:reset_font()
+  screen.font_face(0)
+  screen.font_size(8)
 end
 
-function graphics:root()
-  self:text_right(112, 16, root_cache, 15)
+function graphics:silo()
+  screen.font_face(8)
+  screen.font_size(25)
+  self:text(77, 23, "SiLo", 15)
+  self:text(0, 23, tempo_cache, 15)
 end
 
-
-function graphics:network_status()
-  self:text(123, 7, network.ready and ":)" or ":(", 15)
+function graphics:state()
+  local col_1_x, col_2_x, col_3_x = 0, 42, 85
+  local row_1_y, row_2_y, row_3_y = 26, 39, 52
+  self:draw_status("gye", v.gye.ena, col_2_x, row_1_y)
+  self:draw_status("ixb", v.ixb.ena, col_2_x, row_2_y)
+  self:draw_status("mek", v.mek.ena, col_2_x, row_3_y)
+  self:draw_status("qpo", v.qpo.ena, col_3_x, row_1_y)
+  self:draw_status("urn", v.urn.ena, col_3_x, row_2_y)
+  self:draw_status("vrs", v.vrs.ena, col_3_x, row_3_y)
+  self:text(col_1_x, row_1_y + 7, "root " .. root_cache, 15)
+  self:text(col_1_x, row_2_y + 2, "server " .. (network.ready and ":)" or ":("), 15)
 end
 
-function graphics:spinner()
-  self.spinner_frame = util.wrap(self.spinner_frame + 1, 1, 8)
-  if self.frame % 8 == 0 then
-    self.spinner_index = util.wrap(self.spinner_index + 1, 1, 4)
+function graphics:draw_status(text, status, col, row)
+  local width = 42
+  local height = 12
+  if status == 0 then
+    self:rect(col, row, width, height, 15)
+    self:rect(col + 1, row + 1, width - 2, height - 2, 0)
+    self:text_right(col + 20, row + 7, text, 15)
+    self:text(col + 25, row + 7, "off", 15)
+  elseif status == 1 then
+    self:rect(col, row, width, height, 15)
+    self:text_right(col + 20, row + 7, text, 0)
+    self:text(col + 25, row + 7, "on", 0)
   end
-  self:text(117, 7, self.spinner_glyph[self.spinner_index], 15)
 end
 
 -- northern information
