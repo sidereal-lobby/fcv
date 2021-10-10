@@ -58,6 +58,7 @@ function tempo_action()
   root_cache = v.root()
   tempo_cache = v.tempo()
   params:set("clock_tempo", tempo_cache)
+  engine.bpm(tempo_cache)
 end
 
 function key(k, z)
