@@ -1,9 +1,23 @@
 Engine_Fcv : CroneEngine {
+  ~bps = 120;
 	*new { arg context, doneCallback;
 		^super.new(context, doneCallback);
 	}
 
 	alloc {
+    // Global bps (beats-per-second) tempo
+    Ndef(\bps, {|bps, lag=0| bps.lag(0); });
+    
+    this.addCommand("bps", "f", {|msg|
+      ~bps = msg[1];
+      Ndef(\bps).set(\bps, msg[1]);
+    });
+
+    this.addCommand("bpm", "f", {|msg|
+      ~bps = msg[1] / 60;
+      Ndef(\bps).set(\bps, msg[1]);
+    });
+
     [\gye, \ixb, \mek, \urn, \vrs, \qpo].do({|x|
       Ndef(x).fadeTime = 2;
       Ndef(x, {|t_trig=0, note=48, volume=1, mod=0, lag=0| 
