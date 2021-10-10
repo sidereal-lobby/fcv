@@ -46,7 +46,7 @@ function six.step(voice)
   six:update_meter(voice)
   if v[voice]["ena"] == 1 then
     engine.note(voice, root_cache + v[voice]["tpz"]() + v[voice]["nte"]())
-    engine.mod(voice, v[voice]["mod"]())
+    engine.mod(voice, util.linlin(0, 100, 0.0, 1.0, v[voice]["mod"]()))
     if v[voice]["trg"]() == 1 then
       engine.trig(voice, util.linlin(0, 100, 0.0, 1.0, v[voice]["vel"]()))
     end

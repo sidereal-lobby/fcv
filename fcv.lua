@@ -2,7 +2,6 @@
 
 engine.name = 'Fcv'
   
-  -- audio = require("audio")
       s = require("sequins")
 lattice = require("lattice")
 tabutil = require("tabutil")
@@ -19,13 +18,13 @@ graphics = include("lib/graphics")
 v = { gye = {}, ixb = {}, mek = {}, qpo = {}, urn = {}, vrs = {} }     
    
 for key, val in pairs(v) do
-  v[key]["ena"] = 1     -- enabled: 0 or 1
-  v[key]["mod"] = s{1}  -- modulation: 0 - 1000
-  v[key]["mtr"] = s{1}  -- meter: 1 - n
-  v[key]["nte"] = s{0}  -- note: semitones from v.root aka root 
-  v[key]["tpz"] = s{0}  -- transpose: just this voice
-  v[key]["trg"] = s{1}  -- trigger: 0 or 1
-  v[key]["vel"] = s{100}  -- velocity: 0 - 1000
+  v[key]["ena"] = 1       -- enabled: 0 or 1
+  v[key]["mod"] = s{0}    -- modulation: 0 - 100
+  v[key]["mtr"] = s{1}    -- meter: 1 - n
+  v[key]["nte"] = s{0}    -- note: semitones from v.root
+  v[key]["tpz"] = s{0}    -- transpose: just this voice
+  v[key]["trg"] = s{1}    -- trigger: 0 or 1
+  v[key]["vel"] = s{100}  -- velocity: 0 - 100
 end
 
 v.root = s{60}  -- root
@@ -37,15 +36,16 @@ root_cache, tempo_cache = v.root(), v.tempo()
 
 
 function init()
-  -- y u no work
-  -- audio.comp_on()
-  -- audio.comp_mix(.5)
-  -- audio.comp_param("ratio",      4.0)
-  -- audio.comp_param("threshold",  -10.0)
-  -- audio.comp_param("attack",     5.0)
-  -- audio.comp_param("release",    51.0)
-  -- audio.comp_param("pre_gain",   0.0)
-  -- audio.comp_param("post_gain",  9.0)  
+  -- compressor settings
+  -- MISTER SPARKLE PLEASE SEASON TO TASTE AND COMMIT TO MAIN
+  params:set("compressor",      2)
+  params:set("comp_mix",        .5)
+  params:set("comp_ratio",      4.0)
+  params:set("comp_threshold",  -9.0)
+  params:set("comp_attack",     5.0)
+  params:set("comp_release",    51.0)
+  params:set("comp_pre_gain",   0.0)
+  params:set("comp_post_gain",  9.0)  
 
 
   print('norns.script.load("'..norns.state.script..'")')
