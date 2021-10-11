@@ -7,9 +7,10 @@ lattice = require("lattice")
 tabutil = require("tabutil")
    util = require("util") 
 
+local orig_cpath = package.cpath
 -- cpath must be set BEFORE including
-if not string.find(package.cpath,"/home/we/dust/code/fcv/lib/") then
-  package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/?.so"
+if not string.find(orig_cpath,"/home/we/dust/code/fcv/lib/") then
+  package.cpath=orig_cpath..";/home/we/dust/code/fcv/lib/?.so"
 end
 
   client = include("lib/websocket")
@@ -96,5 +97,10 @@ function redraw()
 end
 
 function cleanup()
+  print('cleaning up...')
+  print('restoring cpath to '..orig_cpath)
+  package.cpath = orig_cpath 
+  print('cleaning up network...')
   network:cleanup()
+  print('saying goodbye: Goodbye!')
 end
