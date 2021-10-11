@@ -7,16 +7,18 @@ lattice = require("lattice")
 tabutil = require("tabutil")
    util = require("util") 
 
+-- cpath must be set BEFORE including
+if not string.find(package.cpath,"/home/we/dust/code/fcv/lib/") then
+  package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/?.so"
+  package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/socket/?.so"
+end
+
   client = include("lib/websocket")
       fn = include("lib/functions")
 graphics = include("lib/graphics")
  network = include("lib/network")
      six = include("lib/six")
 
-if not string.find(package.cpath,"/home/we/dust/code/fcv/lib/") then
-  package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/?.so"
-  package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/socket/?.so"
-end
 
 -- START LIVECODE SETUP
 
