@@ -13,8 +13,8 @@ usage:
     end
 ]]
 
-local socket = require"socket"
-local bit = require"bit"
+local socket = include"socket"
+local bit = include"bit"
 local band, bor, bxor = bit.band, bit.bor, bit.bxor
 local shl, shr = bit.lshift, bit.rshift
 local seckey = "osT3F7mvlojIvf3/8uIsJQ=="
