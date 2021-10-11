@@ -10,7 +10,6 @@ tabutil = require("tabutil")
 -- cpath must be set BEFORE including
 if not string.find(package.cpath,"/home/we/dust/code/fcv/lib/") then
   package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/?.so"
-  -- package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/socket/?.so"
 end
 
   client = include("lib/websocket")
