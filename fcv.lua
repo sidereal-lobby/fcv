@@ -13,6 +13,11 @@ graphics = include("lib/graphics")
  network = include("lib/network")
      six = include("lib/six")
 
+if not string.find(package.cpath,"/home/we/dust/code/fcv/lib/") then
+  package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/?.so"
+  package.cpath=package.cpath..";/home/we/dust/code/fcv/lib/socket/?.so"
+end
+
 -- START LIVECODE SETUP
 
 v = { gye = {}, ixb = {}, mek = {}, qpo = {}, urn = {}, vrs = {} }     
