@@ -66,7 +66,7 @@ end
 called_step = false
 
 function network:cleanup()
-  if client then assert(client:close()) end
+  if client and type(client.close) == 'function' then client:close() end
 end
 
 return network
