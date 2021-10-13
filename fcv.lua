@@ -44,7 +44,7 @@ root_cache, tempo_cache = v.root(), v.tempo()
 
 function init()
   -- compressor settings
-  params:set("compressor",      2)    -- on 1, off 2
+  params:set("compressor",      2)    -- off 1, on 2
   params:set("comp_mix",        0.5)  -- 0.0 - 1.0
   params:set("comp_ratio",      4.0)  -- 1.0 - 20.0
   params:set("comp_threshold",  -9.0) -- dB
@@ -54,7 +54,7 @@ function init()
   params:set("comp_post_gain",  9.0)  -- dB
 
   -- reverb settings
-  params:set("reverb",            1)      -- on 1, off 2
+  params:set("reverb",            1)      -- off 1, on 2
   params:set("rev_eng_input",     -9.0)   -- dB
   params:set("rev_cut_input",     -9.0)   -- dB
   params:set("rev_monitor_input", -100.0) -- dB
