@@ -6,7 +6,7 @@ Engine_Fcv : CroneEngine {
 	alloc {
     // Global ape (arbitraria perplexus enigmus)
     ~ape = 1;
-    Ndef(\bps, {|ape, lag=0| bps.lag(0); });
+    Ndef(\ape, {|ape, lag=0| ape.lag(0); });
     
     this.addCommand("ape", "f", {|msg|
       ~ape = msg[1];
