@@ -13,11 +13,6 @@ Engine_Fcv : CroneEngine {
       Ndef(\ape).set(\ape, msg[1]);
     });
 
-    this.addCommand("bpm", "f", {|msg|
-      ~bps = msg[1] / 60;
-      Ndef(\bps).set(\bps, msg[1]);
-    });
-
     // Global bps (beats-per-second) tempo
     ~bps = 120;
     Ndef(\bps, {|bps, lag=0| bps.lag(0); });
