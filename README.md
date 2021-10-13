@@ -6,17 +6,20 @@
 
 # NORNS SETUP
 
-This was a dark forest to setup. We swapped tarballs of dependencies and didn't document it very well. But minimally you need to have need to have:
+- Restart after downloading.
+- Copy `lib/default-config.lua` to `lib/config.lua`.
+- Enter secret IP address for the `ws_relay_host`.
+- Optionally enter a `norns_name`. 
 
-- Lua 5.3
-- `luarocks` to install `http`
-- `openssl`
-- `lssl`
-- `crypto` something
+# SPECTATOR INSTRUCTIONS
 
-Sorry.
+ - ssh into the secret server.
+ - Attach to Tyler's session: `tmux -S /tmp/stonks_socket attach -t stonks_session -r`
+ - Open a new tab or ssh into the server again.
+ - Attach to Ryan's session: `tmux -S /tmp/sparkle_socket attach -t sparkle_session -r`
+ - Open the FCV script on your norns. You should see a smiley face when the connection is established.
 
-# SERVER SETUP
+# SilO Secret Stiff
 
 We're using a Digital Ocean Unbuntu Droplet with `1 GB Memory / 25 GB Disk / SFO3 - Ubuntu 20.04 (LTS) x64`.
 
