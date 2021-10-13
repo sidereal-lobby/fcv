@@ -34,8 +34,16 @@ for key, val in pairs(v) do
   v[key]["vel"] = s{100}  -- velocity: 0 - 100
 end
 
-v.root = s{60}  -- root
-v.tempo = s{120} -- tempo
+v.ape              = s{1}      -- ape
+v.root             = s{60}     -- root
+v.tempo            = s{120}    -- tempo
+v.reverb           = s{1}      -- off 1, on 2
+v.rev_return_level = s{0.0}    -- db
+v.rev_pre_delay    = s{60.0}   -- ms
+v.rev_lf_fc        = s{200.0}  -- hz
+v.rev_low_time     = s{6.0}    -- seconds
+v.rev_mid_time     = s{6.0}    -- seconds
+v.rev_hf_damping   = s{6000.0} -- hz
 
 root_cache, tempo_cache = v.root(), v.tempo()
 
@@ -54,17 +62,17 @@ function init()
   params:set("comp_post_gain",  9.0)  -- dB
 
   -- reverb settings
-  params:set("reverb",            1)      -- off 1, on 2
+  params:set("reverb",            v.reverb())
   params:set("rev_eng_input",     -9.0)   -- dB
   params:set("rev_cut_input",     -9.0)   -- dB
   params:set("rev_monitor_input", -100.0) -- dB
   params:set("rev_tape_input",    -100.0) -- dB
-  params:set("rev_return_level",  0.0)    -- dB
-  params:set("rev_pre_delay",     60.0)   -- ms
-  params:set("rev_lf_fc",         200.0)  -- hz
-  params:set("rev_low_time",      6.0)    -- seconds
-  params:set("rev_mid_time",      6.0)    -- seconds
-  params:set("rev_hf_damping",    6000.0) -- hz
+  params:set("rev_return_level",  v.rev_return_level())
+  params:set("rev_pre_delay",     v.rev_pre_delay())
+  params:set("rev_lf_fc",         v.rev_lf_fc())
+  params:set("rev_low_time",      v.rev_low_time())
+  params:set("rev_mid_time",      v.rev_mid_time())
+  params:set("rev_hf_damping",    v.rev_hf_damping())
 
   print('norns.script.load("'..norns.state.script..'")')
   params:set("clock_tempo", v.tempo())

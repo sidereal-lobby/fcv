@@ -4,6 +4,20 @@ Engine_Fcv : CroneEngine {
 	}
 
 	alloc {
+    // Global ape (arbitraria perplexus enigmus)
+    ~ape = 1;
+    Ndef(\bps, {|ape, lag=0| bps.lag(0); });
+    
+    this.addCommand("ape", "f", {|msg|
+      ~ape = msg[1];
+      Ndef(\ape).set(\ape, msg[1]);
+    });
+
+    this.addCommand("bpm", "f", {|msg|
+      ~bps = msg[1] / 60;
+      Ndef(\bps).set(\bps, msg[1]);
+    });
+
     // Global bps (beats-per-second) tempo
     ~bps = 120;
     Ndef(\bps, {|bps, lag=0| bps.lag(0); });
