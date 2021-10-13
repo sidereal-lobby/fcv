@@ -22,10 +22,10 @@ graphics = include("lib/graphics")
 
 -- START LIVECODE SETUP
 
-v = { gye = {}, ixb = {}, mek = {}, qpo = {}, urn = {}, vrs = {} }     
+v = { gye = {}, ixb = {}, lor = {}, mek = {}, qpo = {}, vrs = {} }
    
 for key, val in pairs(v) do
-  v[key]["ena"] = 1       -- enabled: 0 or 1
+  v[key]["ena"] = s{math.random(0,1)}    -- enabled: 0 or 1
   v[key]["mod"] = s{0}    -- modulation: 0 - 100
   v[key]["mtr"] = s{1}    -- meter: 1 - n
   v[key]["nte"] = s{0}    -- note: semitones from v.root
@@ -44,16 +44,27 @@ root_cache, tempo_cache = v.root(), v.tempo()
 
 function init()
   -- compressor settings
-  -- MISTER SPARKLE PLEASE SEASON TO TASTE AND COMMIT TO MAIN
-  params:set("compressor",      2)
-  params:set("comp_mix",        .5)
-  params:set("comp_ratio",      4.0)
-  params:set("comp_threshold",  -9.0)
-  params:set("comp_attack",     5.0)
-  params:set("comp_release",    51.0)
-  params:set("comp_pre_gain",   0.0)
-  params:set("comp_post_gain",  9.0)  
+  params:set("compressor",      2)    -- on 1, off 2
+  params:set("comp_mix",        0.5)  -- 0.0 - 1.0
+  params:set("comp_ratio",      4.0)  -- 1.0 - 20.0
+  params:set("comp_threshold",  -9.0) -- dB
+  params:set("comp_attack",     5.0)  -- ms
+  params:set("comp_release",    51.0) -- ms
+  params:set("comp_pre_gain",   0.0)  -- dB
+  params:set("comp_post_gain",  9.0)  -- dB
 
+  -- reverb settings
+  params:set("reverb",            1)      -- on 1, off 2
+  params:set("rev_eng_input",     -9.0)   -- dB
+  params:set("rev_cut_input",     -9.0)   -- dB
+  params:set("rev_monitor_input", -100.0) -- dB
+  params:set("rev_tape_input",    -100.0) -- dB
+  params:set("rev_return_level",  0.0)    -- dB
+  params:set("rev_pre_delay",     60.0)   -- ms
+  params:set("rev_lf_fc",         200.0)  -- hz
+  params:set("rev_low_time",      6.0)    -- seconds
+  params:set("rev_mid_time",      6.0)    -- seconds
+  params:set("rev_hf_damping",    6000.0) -- hz
 
   print('norns.script.load("'..norns.state.script..'")')
   params:set("clock_tempo", v.tempo())
