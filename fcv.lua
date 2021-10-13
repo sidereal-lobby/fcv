@@ -25,7 +25,7 @@ graphics = include("lib/graphics")
 v = { gye = {}, ixb = {}, lor = {}, mek = {}, qpo = {}, vrs = {} }
    
 for key, val in pairs(v) do
-  v[key]["ena"] = s{math.random(0,1)}    -- enabled: 0 or 1
+  v[key]["ena"] = s{1}    -- enabled: 0 or 1
   v[key]["mod"] = s{0}    -- modulation: 0 - 100
   v[key]["mtr"] = s{1}    -- meter: 1 - n
   v[key]["nte"] = s{0}    -- note: semitones from v.root
