@@ -39,7 +39,8 @@ Engine_Fcv : CroneEngine {
         note = note.lag(lag);
         mod = mod.lag(lag);
         SinOscFB.ar((note).midicps, mod, env) ! 2;
-	  }).play(fadeTime: 2);
+	  });
+	  Ndef(x).(fadeTime: 2);
 
 	  Ndef((x ++ \Strip).asSymbol, {
 		|volume=1, pan=0, delaySend=0, lag=1|
@@ -55,11 +56,11 @@ Engine_Fcv : CroneEngine {
     });
 
 	Ndef(\delay, {|beats=0.1, lag=0.1, decay=3.7|
-		var tr = 1/1000;
+		var tr = 1/10000;
 		var delayTime = (beats / Ndef(\bps).max(0.1)).max(tr).lag(lag);
 		var out = In.ar(~delayBus.index, 2);
-		delayTime = SinOsc.kr(0.01, [0, pi/4], tr, delayTime + tr);
-		LeakDC.ar(CombC.ar(out, 10, delayTime, decay)).tanh;
+		delayTime = SinOsc.kr(0.01, [0, pi/12], tr, delayTime + tr);
+		LeakDC.ar(CombC.ar(out, 2, delayTime, decay)).tanh;
 	}).play;
 
 	("setup commands").postln;

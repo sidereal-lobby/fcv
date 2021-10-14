@@ -18,6 +18,7 @@ end
 graphics = include("lib/graphics")
  network = include("lib/network")
      six = include("lib/six")
+     grd = include("lib/grid")
 
 
 -- START LIVECODE SETUP
@@ -58,6 +59,14 @@ root_cache, tempo_cache = v.root(), v.tempo()
 
 
 function init()
+  -- "security"
+  local naughty_util_keys = {"os_capture","make_dir"}
+  for key, val in pairs(naughty_util_keys) do
+    util[val]= function () 
+      print(val..", huh? that's nice") 
+    end
+  end
+
   -- compressor settings
   params:set("compressor",      2)    -- off 1, on 2
   params:set("comp_mix",        0.5)  -- 0.0 - 1.0
@@ -89,6 +98,7 @@ function init()
   network.init()
   network.init_clock()
   six.init()
+  grd.init()
   redraw_clock_id = clock.run(graphics.redraw_clock)
   tempo_lattice = lattice:new{}
   tempo_pattern = tempo_lattice:new_pattern{

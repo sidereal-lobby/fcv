@@ -1,5 +1,7 @@
 local six = {}
 
+six.names = {"gye","ixb","lor","mek","qpo","vrs"}
+
 gye_lattice = lattice:new{}
 gye_pattern = gye_lattice:new_pattern{
   action = function() six.step("gye") end
@@ -52,13 +54,6 @@ function six.step(voice)
       graphics:trigger(voice)
     end
   end
-
-  -- channel strip, not trig-related
-  -- HI TYLER, THESE ARE BROKEN. I DID A DUMB SOMEWHERE
-  --engine.level(voice, v[voice]["lvl"])
-  --engine.pan(voice, v[voice]["pan"])
-  --engine.send_delay(voice, v[voice]["del"])
-  --engine.lag(voice, v[voice]["lag"])
 end
 
 function six:update_meter(voice)

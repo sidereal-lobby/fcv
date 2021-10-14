@@ -5,7 +5,6 @@ function network.init()
   client = client.new(config.ws_relay_host, config.ws_relay_port)
 
   function client:onmessage(s) 
-
     local break_index = string.find(s, '\n')
     if break_index ~= nil and break_index > 1 then
       -- get the command
@@ -60,6 +59,14 @@ function network.step()
   if not network.ready then 
     -- print("please wait to connect...")
     return
+  end
+end
+
+function network.tx_lua(code)
+  if network.ready then
+    client:send('LUA\n'..code)
+  else
+    print("can't send code - network not ready")
   end
 end
 
