@@ -32,6 +32,10 @@ for key, val in pairs(v) do
   v[key]["tpz"] = s{0}    -- transpose: just this voice
   v[key]["trg"] = s{1}    -- trigger: 0 or 1
   v[key]["vel"] = s{100}  -- velocity: 0 - 100
+  v[key]["lvl"] = s{1}    -- volume: -1 - 1 (or more, to clip)
+  v[key]["pan"] = s{0}    -- pan: -1 - 1
+  v[key]["del"] = s{0}    -- delay send: -1 - 1 (or more, to clip)
+  v[key]["lag"] = s{0}    -- channel strip lag: 0 - +inf (seconds)
 end
 
 v.ape              = s{1}      -- ape
@@ -44,6 +48,9 @@ v.rev_lf_fc        = s{200.0}  -- hz
 v.rev_low_time     = s{6.0}    -- seconds
 v.rev_mid_time     = s{6.0}    -- seconds
 v.rev_hf_damping   = s{6000.0} -- hz
+v.delay_beats      = s{3/4}    -- beats
+v.delay_decay      = s{5}      -- seconds
+v.delay_lag        = s{0.05}   -- seconds
 
 root_cache, tempo_cache = v.root(), v.tempo()
 
