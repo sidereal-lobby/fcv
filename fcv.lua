@@ -89,6 +89,16 @@ function init()
   params:set("rev_low_time",      v.rev_low_time())
   params:set("rev_mid_time",      v.rev_mid_time())
   params:set("rev_hf_damping",    v.rev_hf_damping())
+  
+  -- delay settings
+  -- todo: wire these into the ancient tables
+  -- engine.pan("gye", 0.5)
+  -- engine.lag("gye", 20)
+  -- engine.level("gye", 1.0)
+  -- engine.send_delay("gye", 0.1)
+  -- engine.delay_beats(3/4)
+  -- engine.delay_decay(10)
+  -- engine.delay_lag(0.2)
 
   print('norns.script.load("'..norns.state.script..'")')
   params:set("clock_tempo", v.tempo())
