@@ -69,6 +69,7 @@ Engine_Fcv : CroneEngine {
     });
 
 	this.addCommand("pan", "sf", {|msg|
+			("lag for"+msg[1]+"set to"+msg[2]).postln;
 		Ndef((msg[1] ++ "Strip").asSymbol).set(\pan, msg[2]);
     });
 
